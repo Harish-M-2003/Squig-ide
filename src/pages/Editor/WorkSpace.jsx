@@ -37,7 +37,7 @@ export default function WorkSpace() {
   const [setUpCompleted , setSetUpCompleted] = useState(false);
 
   useEffect(()=>{
-    setTimeout(() => setSetUpCompleted(true) , 2000)
+    setTimeout(() => setSetUpCompleted(true) , 2500)
   },[])
 
   // useEffect(() => console.log(files),[code])
@@ -52,7 +52,9 @@ export default function WorkSpace() {
           opacity : 0.5,
         }
       }/>
-      <h1  className='text-white font-bold text-8xl'>SQUIG IDLE</h1>
+      {/* <progress max={100} value={10}></progress> */}
+      
+      <h1  className='text-white font-bold text-8xl' style={{fontFamily : "initial"}}>SQUIG</h1>
     </div>
       :
       <div className='h-screen bg-gray-900'>

@@ -14,7 +14,7 @@ function createWindow () {
     }
   })
 
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   //load the index.html from a url
   win.setMenu(null);
