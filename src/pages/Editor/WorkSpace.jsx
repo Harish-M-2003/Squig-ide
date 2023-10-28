@@ -54,7 +54,7 @@ export default function WorkSpace() {
       }/>
       {/* <progress max={100} value={10}></progress> */}
       
-      <h1  className='text-white font-bold text-8xl' style={{fontFamily : "initial"}}>SQUIG</h1>
+      <span className='text-white font-bold text-8xl' style={{fontFamily : "Open Sans"}}>SQUIG</span>
     </div>
       :
       <div className='h-screen bg-gray-900'>

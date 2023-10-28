@@ -4,6 +4,7 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import React, { useEffect, useState }  from 'react';
 import {AiFillCloseCircle, AiFillMinusCircle,} from "react-icons/ai";
+import {TbResize} from "react-icons/tb";
 import TaskBar from './TaskBar';
 import logo from "./icon.png"
 
@@ -119,7 +120,7 @@ export default function EditorNavBar({Code , content , setFile ,  current_files 
           </div>
           <div onClick={()=> window.preloadApi.unmaximize()}>
             {/* <AiFillBoxPlot/> */}
-            <AiFillCloseCircle/>
+            <TbResize/>
           </div>
 
           <div onClick={()=> {
