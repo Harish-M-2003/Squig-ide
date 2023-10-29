@@ -15,6 +15,8 @@ import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/ext-language_tools";
 import logo from "./Components/icon.png";
+import { AiFillCloseCircle, AiFillMinusCircle } from 'react-icons/ai';
+import { TbResize } from 'react-icons/tb';
 
 
 export default function WorkSpace() {
@@ -22,6 +24,7 @@ export default function WorkSpace() {
   const [code, setCode] = React.useState("");
   const [files , setFiles] = useState([]);
   const [currentTabName , setCurrentTabName] = useState('');
+  const [opacity , setOpacity] = useState(0.5);
 
   function handleCode(program){
     
@@ -43,27 +46,41 @@ export default function WorkSpace() {
   // useEffect(() => console.log(files),[code])
 
   return (
-    <>
+    <div style={{backgroundColor : "rgb(14,42,53)"}}>
     {(!setUpCompleted)?
-    <div style={{background : "rgb(14, 42, 53)" }} className='flex justify-center gap-10 items-center h-screen flex-col'>
+    <>
+    <div className='text-white flex flex-row-reverse px-3 pt-2 gap-5'>
+      <div onClick={()=> window.preloadApi.close()}>
+        <AiFillCloseCircle/>
+      </div>
+      <div className='text-gray-600'>
+        <TbResize/>
+      </div>
+      <div onClick={()=>window.preloadApi.minimize()}>
+        <AiFillMinusCircle/>
+      </div>
+    </div>
+    <div style={{background : "rgb(14, 42, 53)"}} className='flex justify-center gap-10 items-center h-screen flex-col'>
       <img src={logo} style={
         {
           height : "50vh",
           opacity : 0.5,
+          transform : "scaleX(-1)"
         }
       }/>
-      {/* <progress max={100} value={10}></progress> */}
       
       <span className='text-white font-bold text-8xl' style={{fontFamily : "Open Sans"}}>SQUIG</span>
     </div>
+    </>
       :
-      <div className='h-screen bg-gray-900'>
+      <div className='h-screen bg-gray-900' onLoad={()=>  window.preloadApi.unmaximize()}>
 
       <EditorNavBar 
           Code = {setCode} 
           content = {code} 
           setFile = {setFiles} 
           current_files = {files}
+          tab_name = {currentTabName}
           current_tab_name = {setCurrentTabName}
       />
       
@@ -91,6 +108,6 @@ export default function WorkSpace() {
     
     </div>
 }
-  </>
+  </div>
   );
 }
