@@ -1,11 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import Editor from 'react-simple-code-editor';
-import { highlight, languages } from 'prismjs/components/prism-core';
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-javascript';
-// import 'prismjs/components/'
-import 'prismjs/themes/prism.css'; //Example style, you can use another
-
+import React, { useEffect, useRef, useState } from 'react';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import EditorNavBar from './Components/NavBar';
@@ -19,12 +12,12 @@ import { AiFillCloseCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { TbResize } from 'react-icons/tb';
 
 
+
 export default function WorkSpace() {
 
   const [code, setCode] = React.useState("");
   const [files , setFiles] = useState([]);
   const [currentTabName , setCurrentTabName] = useState('');
-  const [opacity , setOpacity] = useState(0.5);
 
   function handleCode(program){
     
@@ -37,19 +30,38 @@ export default function WorkSpace() {
     setCode(program)
   }
 
-  const [setUpCompleted , setSetUpCompleted] = useState(false);
+  const [setUpCompleted , setSetUpCompleted] = useState(!false);
 
-  useEffect(()=>{
-    setTimeout(() => setSetUpCompleted(true) , 2500)
-  },[])
+  // useEffect(()=>{
+  //   setTimeout(() => {
+  //     setSetUpCompleted(true)
+  //   } , 2500)
+  // },[])
 
-  // useEffect(() => console.log(files),[code])
+  const editor = useRef(null);
+
+  window.addEventListener("keydown" , event => {
+    
+    if (event.key == "q" && event.ctrlKey){
+      window.preloadApi.close();
+    } 
+  })
 
   return (
-    <div style={{backgroundColor : "rgb(14,42,53)"}}>
+    <div className='bg-gray-800' onKeyDown={
+      (event)=>{
+        if (event.key === "o" && event.ctrlKey){
+          window.preloadApi.openFile()
+          window.preloadApi.fileContent((event ,filename ,path , data) => {
+            setCurrentTabName(filename)
+            setCode(data) ; 
+            setFiles([{name : filename , path : path, code : data},...files])
+          })
+        }
+      }}>
     {(!setUpCompleted)?
-    <>
-    <div className='text-white flex flex-row-reverse px-3 pt-2 gap-5'>
+    <div>
+    <div className='text-white flex flex-row-reverse px-3 py-2 gap-5'>
       <div onClick={()=> window.preloadApi.close()}>
         <AiFillCloseCircle/>
       </div>
@@ -60,7 +72,7 @@ export default function WorkSpace() {
         <AiFillMinusCircle/>
       </div>
     </div>
-    <div style={{background : "rgb(14, 42, 53)"}} className='flex justify-center gap-10 items-center h-screen flex-col'>
+    <div  style={{backgroundColor : "rgb(14,42,53)"}}className='flex justify-center gap-10 items-center h-screen flex-col'>
       <img src={logo} style={
         {
           height : "50vh",
@@ -71,7 +83,7 @@ export default function WorkSpace() {
       
       <span className='text-white font-bold text-8xl' style={{fontFamily : "Open Sans"}}>SQUIG</span>
     </div>
-    </>
+    </div>
       :
       <div className='h-screen bg-gray-900' onLoad={()=>  window.preloadApi.unmaximize()}>
 
@@ -88,12 +100,20 @@ export default function WorkSpace() {
 
     <AceEditor
 
+      ref={editor}
+      setOptions={{
+        vScrollBarAlwaysVisible : true,
+      }}
+
       style={{
         width : window.screen.width / 0.9,
         height : "100vh",
         color : "white",
+
       }}
-      fontSize={20}
+    
+      className='bg-gray-900'
+      fontSize={20}      
       mode="python"
       value={code}
       theme="solarized_dark"

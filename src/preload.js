@@ -8,5 +8,10 @@ contextBridge.exposeInMainWorld("preloadApi" , {
     fileContent : (callback) => ipcRenderer.on('file-content' , callback), 
     newFile : () => ipcRenderer.send("new-file"),
     newFileCreated : (callback) => ipcRenderer.on('new-file-created' , callback),
+
+}
+
+    // runCode : () => ipcRenderer.send("run-code"),
+    // move : (x,y) => ipcRenderer.send('move-window' , x , y),
     // save : (tab_name) => ipcRenderer.send("save-file" , tab_name),
-})
+)

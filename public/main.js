@@ -2,6 +2,7 @@ const { app, BrowserWindow ,ipcMain , dialog} = require('electron');
 const path = require("path");
 const fs = require("fs");
 
+
 function extractFileName(path){
   return path.substring(path.lastIndexOf('\\')+1);
 }
@@ -18,13 +19,12 @@ function createWindow () {
     }
   })
 
-  win.webContents.openDevTools();
-
-
   win.setMenu(null);
 
+  // win.webContents.openDevTools();
+
   win.loadURL('http://localhost:3000/');
-  
+
   ipcMain.on('unmaximize' , () => {
     if (win.isMaximized()){
       win.unmaximize();
@@ -54,11 +54,17 @@ function createWindow () {
     .catch(err => console.log(err))
   })
 
+
+  // ipcMain.on('run-code' , () => {
+  //   console.log("Running programm squig")
+  // })
+
   ipcMain.on('open-file' , () => {
     dialog.showOpenDialog(win)
-    .then(file => {
-      
 
+    .then(file => {
+      // console.log(file)
+      // if (file.length != 0 && file.filePaths.length != 0){
       fs.readFile(file.filePaths[0] , "utf-8" , (err , data) => {
         if (err){
           console.log("Error " , err);

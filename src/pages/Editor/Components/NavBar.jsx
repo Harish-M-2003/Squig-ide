@@ -7,25 +7,17 @@ import {AiFillCloseCircle, AiFillMinusCircle,} from "react-icons/ai";
 import {TbResize} from "react-icons/tb";
 import TaskBar from './TaskBar';
 import logo from "./icon.png"
-import BreadCrumbs from './BreadCrumbs';
 
-// const electron = window.require('electron');
-// import { IpcRenderer } from 'electron';
-// const {ipcRenderer} = electron;
-// import createWindow from '../../../../public/main';
-// import app  from "electron";
 
-// function newFile
-
-function newFile(fileName , content){
-  const blob = new Blob([content], { type: 'text/plain' });
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = fileName;
-  a.click();
-  window.URL.revokeObjectURL(url);
-}
+// function newFile(fileName , content){
+//   const blob = new Blob([content], { type: 'text/plain' });
+//   const url = window.URL.createObjectURL(blob);
+//   const a = document.createElement('a');
+//   a.href = url;
+//   a.download = fileName;
+//   a.click();
+//   window.URL.revokeObjectURL(url);
+// }
 
 export default function EditorNavBar({Code , content , setFile ,  current_files , tab_name, current_tab_name}){
 
@@ -78,8 +70,10 @@ export default function EditorNavBar({Code , content , setFile ,  current_files 
 
     const file = React.useRef(null);
 
+    
+
     return (
-      <div style={{position : "sticky" , top : 0 ,left : 0,right : 0 , bottom : 10 , zIndex : 10}}>
+      <div  style={{position : "sticky" , top : 0 ,left : 0,right : 0 , bottom : 10 , zIndex : 10}}>
         <div  className='bg-gray-800 flex justify-between pr-5 items-center  text-white border-b border-b-gray-700' >
         <div className='flex gap-4 pl-3 p-[0.5em] border-b border-gray-700'>
           <img src={logo} className='h-[1.5rem] w-[1.5rem]' style={{transform : "scaleX(-1)"}}></img>
@@ -125,7 +119,8 @@ export default function EditorNavBar({Code , content , setFile ,  current_files 
               })
               }} className='hidden'/>
             </Menu>
-            <button>Run</button>
+
+            <button className={"hover:bg-gray-500 px-[0.5em] rounded-lg"} onClick={() => window.preloadApi.runCode()} >Run</button>
             {/* <Menu menuButton={<MenuButton className={"hover:bg-gray-900"}>Run</MenuButton>} onClick={() => console.log("run program")}/> */}
         </div>
         {/* <div onClick={() => {}}>
