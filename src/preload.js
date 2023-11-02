@@ -10,6 +10,7 @@ contextBridge.exposeInMainWorld("preloadApi" , {
     newFileCreated : (callback) => ipcRenderer.on('new-file-created' , callback),
     runCode : (filename) => ipcRenderer.send("run-code" , filename),
     executedContent : (callback) => ipcRenderer.on("executed-output" , callback),
+    saveFile : (path , code) => ipcRenderer.send("save-file" , path , code)
 
 }
 

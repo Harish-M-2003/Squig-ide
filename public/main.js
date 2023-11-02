@@ -56,10 +56,6 @@ function createWindow () {
   })
 
 
-  // ipcMain.on('run-code' , () => {
-  //   console.log("Running programm squig")
-  // })
-
   ipcMain.on("run-code" , (event , filename) =>{
     
     const terminal = spawn(path.join(__dirname , ".." , "src" , "Interpretor" , "Interpretor.exe") , [filename])
@@ -69,7 +65,16 @@ function createWindow () {
       win.webContents.send("executed-output" , `${data}`)
 
     })
-    // console.log(typeof filename)
+    
+  })
+
+  ipcMain.on("save-file" , (event  , filepath , code) => {
+
+    fs.writeFile(filepath , code , (err) => {
+      if (err){
+      console.log(err)
+      }
+    })
   })
 
   ipcMain.on('open-file' , () => {

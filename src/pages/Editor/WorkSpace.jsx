@@ -57,6 +57,24 @@ export default function WorkSpace() {
             setCode(data) ; 
             setFiles([{name : filename , path : path, code : data},...files])
           })
+        } else if (event.key === "s" && event.ctrlKey){
+
+          if (files.length != 0){
+             
+            let file = files.map((file , value) => {
+              if (file.name === currentTabName){
+                return file;
+              }
+            })
+            window.preloadApi.saveFile(file[0].path , file[0].code);
+          }
+        } else if (event.key === "r" && event.ctrlKey){
+          let file = files.map((file , index) => {
+            if (file.name === currentTabName){
+              return file;
+            }
+          })
+          window.preloadApi.runCode(file[0].path)
         }
       }}>
     {(!setUpCompleted)?
