@@ -8,6 +8,8 @@ contextBridge.exposeInMainWorld("preloadApi" , {
     fileContent : (callback) => ipcRenderer.on('file-content' , callback), 
     newFile : () => ipcRenderer.send("new-file"),
     newFileCreated : (callback) => ipcRenderer.on('new-file-created' , callback),
+    runCode : (filename) => ipcRenderer.send("run-code" , filename),
+    executedContent : (callback) => ipcRenderer.on("executed-output" , callback),
 
 }
 

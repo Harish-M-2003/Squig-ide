@@ -1,6 +1,7 @@
 const { app, BrowserWindow ,ipcMain , dialog} = require('electron');
 const path = require("path");
 const fs = require("fs");
+const {spawn} = require("child_process");
 
 
 function extractFileName(path){
@@ -21,7 +22,7 @@ function createWindow () {
 
   win.setMenu(null);
 
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 
   win.loadURL('http://localhost:3000/');
 
@@ -58,6 +59,18 @@ function createWindow () {
   // ipcMain.on('run-code' , () => {
   //   console.log("Running programm squig")
   // })
+
+  ipcMain.on("run-code" , (event , filename) =>{
+    
+    const terminal = spawn(path.join(__dirname , ".." , "src" , "Interpretor" , "Interpretor.exe") , [filename])
+
+    terminal.stdout.on("data" , (data) => {
+
+      win.webContents.send("executed-output" , `${data}`)
+
+    })
+    // console.log(typeof filename)
+  })
 
   ipcMain.on('open-file' , () => {
     dialog.showOpenDialog(win)

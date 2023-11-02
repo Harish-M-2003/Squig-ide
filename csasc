@@ -1,0 +1,35 @@
+[33mcommit 373dbd1981f72de6a928042e86a8febf91901554[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: harishm <harishm762003@gmail.com>
+Date:   Mon Oct 30 20:32:58 2023 +0530
+
+    Added Keyboard shortcurt commands . now supports ctrl+q -> closing the application , ctrl+o -> open a file selection dialog , ctrl + (1...N) -> swtichs the tab.
+
+[33mcommit cfe8970cfa1ceda0ccdb3b22fd91f16de8753243[m
+Author: harishm <harishm762003@gmail.com>
+Date:   Sun Oct 29 21:31:18 2023 +0530
+
+    Included breadcrumbs and solved the task bar issues.
+
+[33mcommit d38429d9bd3094d1793aff5a97a88252a402a133[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mmaster[m[33m)[m
+Author: harishm <harishm762003@gmail.com>
+Date:   Sat Oct 28 21:29:53 2023 +0530
+
+    Changes in Navbar.jsx and WorkSpace.jsx
+
+[33mcommit 660e80eb3921618f62da87717ff8ed4812779b68[m
+Author: harishm <harishm762003@gmail.com>
+Date:   Sat Oct 28 17:38:54 2023 +0530
+
+    Changed the font family in splash screen.
+
+[33mcommit 6b44968bbf81891e5dc1fb299814196df99be245[m
+Author: harishm <harishm762003@gmail.com>
+Date:   Sat Oct 28 17:29:30 2023 +0530
+
+    Created splash screen and included task bar so that the user can switch between different programs.
+
+[33mcommit e4b30dfae1713660a0b81d4b962efa9639962eb1[m
+Author: harishm <harishm762003@gmail.com>
+Date:   Wed Oct 18 21:33:18 2023 +0530
+
+    Initialize project using Create React App

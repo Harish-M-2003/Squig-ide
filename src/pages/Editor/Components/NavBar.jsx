@@ -120,7 +120,17 @@ export default function EditorNavBar({Code , content , setFile ,  current_files 
               }} className='hidden'/>
             </Menu>
 
-            <button className={"hover:bg-gray-500 px-[0.5em] rounded-lg"} onClick={() => window.preloadApi.runCode()} >Run</button>
+            <button className={"hover:bg-gray-500 px-[0.5em] rounded-lg"} onClick={() =>{ 
+              current_files.map((file , index) => {
+                if (file.name === tab_name){
+                  
+                    window.preloadApi.runCode(file.path)
+                    window.preloadApi.executedContent((event , data ) => {
+                      console.log(data);
+                    })
+                }
+              })
+            }} >Run</button>
             {/* <Menu menuButton={<MenuButton className={"hover:bg-gray-900"}>Run</MenuButton>} onClick={() => console.log("run program")}/> */}
         </div>
         {/* <div onClick={() => {}}>
