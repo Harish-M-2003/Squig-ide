@@ -10,6 +10,7 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import logo from "./Components/icon.png";
 import { AiFillCloseCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { TbResize } from 'react-icons/tb';
+import SquigIDETerminal from './Components/SquigIdeTerminal';
 
 
 
@@ -18,6 +19,8 @@ export default function WorkSpace() {
   const [code, setCode] = React.useState("");
   const [files , setFiles] = useState([]);
   const [currentTabName , setCurrentTabName] = useState('');
+  const [terminalOutput , setTerminalOutput] = useState(null);
+  const [isOpen , setIsOpen] = useState(false);
 
   function handleCode(program){
     
@@ -75,6 +78,17 @@ export default function WorkSpace() {
             }
           })
           window.preloadApi.runCode(file[0].path)
+          window.preloadApi.executedContent((event , data ) => {
+            // console.log(data);
+            setTerminalOutput(data);
+          })
+        } else if (event.key === "t" && event.ctrlKey){
+          // console.log("openning termminal")
+          // if (terminalOutput != null){
+          //   setTerminalOutput(null)
+          // }
+          setIsOpen(!isOpen)
+          // focus()
         }
       }}>
     {(!setUpCompleted)?
@@ -112,9 +126,12 @@ export default function WorkSpace() {
           current_files = {files}
           tab_name = {currentTabName}
           current_tab_name = {setCurrentTabName}
+          setTerminalOutput={setTerminalOutput}
       />
       
     <div className='flex overflow-scroll'>
+    
+   
 
     <AceEditor
 
@@ -125,7 +142,7 @@ export default function WorkSpace() {
 
       style={{
         width : window.screen.width / 0.9,
-        height : "100vh",
+        height : "95vh",
         color : "white",
 
       }}
@@ -140,7 +157,10 @@ export default function WorkSpace() {
       enableLiveAutocompletion = {true}
       
   />
-      
+     {(isOpen)?
+      <SquigIDETerminal executedOutput={terminalOutput} setTerminalOutput={setTerminalOutput}/>
+      :
+        null}  
     
     </div>
     

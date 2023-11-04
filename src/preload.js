@@ -10,7 +10,11 @@ contextBridge.exposeInMainWorld("preloadApi" , {
     newFileCreated : (callback) => ipcRenderer.on('new-file-created' , callback),
     runCode : (filename) => ipcRenderer.send("run-code" , filename),
     executedContent : (callback) => ipcRenderer.on("executed-output" , callback),
-    saveFile : (path , code) => ipcRenderer.send("save-file" , path , code)
+    saveFile : (path , code) => ipcRenderer.send("save-file" , path , code),
+    getRootPath : () => ipcRenderer.send("get-root-path"),
+    setRootPath : (path) => ipcRenderer.on("set-root-path" , path),
+    // executeSystemCommands : (command) => ipcRenderer.send("execute-system-command" , command),
+    // getExecutedSystemCommands : () => ipcRenderer.on("")
 
 }
 

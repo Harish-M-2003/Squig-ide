@@ -26,6 +26,20 @@ function createWindow () {
 
   win.loadURL('http://localhost:3000/');
 
+  ipcMain.on("get-root-path" , () =>{
+    win.webContents.send("set-root-path" , __dirname)
+  })
+
+  // ipcMain.on("execute-system-command" , (event , command) =>{
+
+  //   const terminal = spawn(command)
+
+  //   terminal.stdout.on("data" , (data) => {
+  //     win.webContents.send("executed-output" , `${data}`)
+
+  //   })
+  // })
+
   ipcMain.on('unmaximize' , () => {
     if (win.isMaximized()){
       win.unmaximize();
@@ -61,7 +75,6 @@ function createWindow () {
     const terminal = spawn(path.join(__dirname , ".." , "src" , "Interpretor" , "Interpretor.exe") , [filename])
 
     terminal.stdout.on("data" , (data) => {
-
       win.webContents.send("executed-output" , `${data}`)
 
     })

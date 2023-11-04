@@ -19,7 +19,7 @@ import logo from "./icon.png"
 //   window.URL.revokeObjectURL(url);
 // }
 
-export default function EditorNavBar({Code , content , setFile ,  current_files , tab_name, current_tab_name}){
+export default function EditorNavBar({Code , content , setTerminalOutput ,  setFile ,  current_files , tab_name, current_tab_name}){
 
 //   const [contents, setContents] = React.useState(content);
 //   const [unsavedChanges, setUnsavedChanges] = React.useState(false);
@@ -126,7 +126,8 @@ export default function EditorNavBar({Code , content , setFile ,  current_files 
                   
                     window.preloadApi.runCode(file.path)
                     window.preloadApi.executedContent((event , data ) => {
-                      console.log(data);
+                      // console.log(data);
+                      setTerminalOutput(data);
                     })
                 }
               })
